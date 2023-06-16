@@ -16,8 +16,8 @@ option(JUCE_ENABLE_MODULE_SOURCE_GROUPS "Show all module sources in IDE projects
 CPMAddPackage(
   NAME JUCE
   GITHUB_REPOSITORY juce-framework/JUCE
-  VERSION 7.0.2
-  GIT_TAG 7.0.2
+  VERSION c509a1821a10bac9f38e6e81d998ecbc584f3197
+  GIT_TAG c509a1821a10bac9f38e6e81d998ecbc584f3197
 )
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
@@ -43,7 +43,7 @@ juce_add_plugin(${PROJECT_NAME}
     COPY_PLUGIN_AFTER_BUILD TRUE                # Should the plugin be installed to a default location after building?
     PLUGIN_MANUFACTURER_CODE Js3d               # A four-character manufacturer id with at least one upper-case character
     PLUGIN_CODE jsIs                            # A unique four-character plugin id with at least one upper-case character
-    FORMATS VST3 AU                             # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    FORMATS VST3                             # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
     PLUGIN_NAME ${PROJECT_NAME}                 # The plugin name displayed in the DAW.
     PRODUCT_NAME ${PROJECT_NAME}                # The name of the final executable, which can differ from the target name
     DESCRIPTION ${PROJECT_DESCRIPTION}          # A short description of the plugin.
