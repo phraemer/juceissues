@@ -68,7 +68,7 @@ if(MSVC)
     $<$<CONFIG:Debug>:/MTd>         # Runtime library: Multi-threaded Debug
   )
 else()
-  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version" FORCE)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum OS X deployment version" FORCE)
   message(STATUS "Minimum OS X deployment version " ${CMAKE_OSX_DEPLOYMENT_TARGET})
 endif()
 
