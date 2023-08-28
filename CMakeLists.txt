@@ -16,8 +16,8 @@ option(JUCE_ENABLE_MODULE_SOURCE_GROUPS "Show all module sources in IDE projects
 CPMAddPackage(
   NAME JUCE
   GITHUB_REPOSITORY juce-framework/JUCE
-  VERSION c509a1821a10bac9f38e6e81d998ecbc584f3197
-  GIT_TAG c509a1821a10bac9f38e6e81d998ecbc584f3197
+  VERSION bff4cde05598fd03f425cdca9b4ed52b865bb356
+  GIT_TAG bff4cde05598fd03f425cdca9b4ed52b865bb356
 )
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
