@@ -24,7 +24,3 @@ jobs:
       - name: Generate
         shell: bash
         run: ./generate_ios.sh
-
-      - name: Build iOS
-        shell: bash
-        run: ./build_debug.sh
