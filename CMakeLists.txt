@@ -13,11 +13,14 @@ set_property(GLOBAL PROPERTY USE_FOLDERS YES)
 # Create a /Modules directory in the IDE with the JUCE Module code
 option(JUCE_ENABLE_MODULE_SOURCE_GROUPS "Show all module sources in IDE projects" ON)
 
+# Build for iOS?
+option(BUILD_IOS "Build for iOS" OFF)
+
 CPMAddPackage(
   NAME JUCE
   GITHUB_REPOSITORY juce-framework/JUCE
-  VERSION bff4cde05598fd03f425cdca9b4ed52b865bb356
-  GIT_TAG bff4cde05598fd03f425cdca9b4ed52b865bb356
+  VERSION 4bc295241994409a77b9227943650e59d95ef3d0
+  GIT_TAG 4bc295241994409a77b9227943650e59d95ef3d0
 )
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
@@ -32,6 +35,16 @@ CPMAddPackage(
 # the formats specified by the FORMATS arguments. This function accepts many optional arguments.
 # Check the readme at `docs/CMake API.md` in the JUCE repo for the full list.
 
+# If building for iOS set FORMATS to AUv3 and Standalone
+if(BUILD_IOS)
+  set(FORMATS AUv3 Standalone)
+  set(ICLOUD_PERMISSIONS_ENABLED TRUE)
+  file(READ "Info.plist" PLIST_CONTENT_TO_MERGE)
+else()
+  set(FORMATS VST3 Standalone)
+  set(ICLOUD_PERMISSIONS_ENABLED FALSE)
+endif()
+
 juce_add_plugin(${PROJECT_NAME}
     COMPANY_NAME "James Swift"                  # Specify the name of the plugin's author
     BUNDLE_ID com.3dengineer.testexplore        # Bundle ID for Apple
@@ -43,10 +56,18 @@ juce_add_plugin(${PROJECT_NAME}
     COPY_PLUGIN_AFTER_BUILD TRUE                # Should the plugin be installed to a default location after building?
     PLUGIN_MANUFACTURER_CODE Js3d               # A four-character manufacturer id with at least one upper-case character
     PLUGIN_CODE jsIs                            # A unique four-character plugin id with at least one upper-case character
-    FORMATS VST3                             # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    FORMATS ${FORMATS}                          # The formats to build. Other valid formats are: AAX Unity VST AU AUv3
+    ICLOUD_PERMISSIONS_ENABLED ${ICLOUD_PERMISSIONS_ENABLED} # Enable iCloud permissions
+    PLIST_CONTENT_TO_MERGE ${PLIST_CONTENT_TO_MERGE} # Merge the contents of this plist file into the Info.plist
     PLUGIN_NAME ${PROJECT_NAME}                 # The plugin name displayed in the DAW.
     PRODUCT_NAME ${PROJECT_NAME}                # The name of the final executable, which can differ from the target name
     DESCRIPTION ${PROJECT_DESCRIPTION}          # A short description of the plugin.
+    MICROPHONE_PERMISSION_ENABLED TRUE
+    MICROPHONE_PERMISSION_TEXT "This app requires access to your microphone to function."
+    PLIST_TO_MERGE "${PLIST_CONTENT_TO_MERGE}"
+    REQUIRES_FULL_SCREEN TRUE
+    IPHONE_SCREEN_ORIENTATIONS UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
+    IPAD_SCREEN_ORIENTATIONS UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
 )
 
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
