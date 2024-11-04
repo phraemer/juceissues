@@ -1,11 +1,4 @@
-## JUCE basic plugin to test and explore issues
+## This branch of this repo is for testing two AUv3 in one
 
-On Windows:
-
-- To generate a Visual Studio 2022 solution `generate.bat`
-- To build `build_debug.bat`
-
-On macOS:
-
-- To generate the Xcode project `./generate.sh`
-- To build `./build_debug.sh`
+- To generate the Xcode project `./generate_ios.sh [TEAM ID]`
+- To build open the project in Xcode
