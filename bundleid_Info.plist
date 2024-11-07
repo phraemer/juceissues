@@ -4,5 +4,7 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>CFBundleIdentifier</key>
+	<string>BUNDLE_ID_HERE</string>
 </dict>
 </plist>

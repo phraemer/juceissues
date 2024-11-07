@@ -29,6 +29,11 @@ set(BUNDLE_ID_AUMF com.3dengineer.${PROJECT_NAME}.${PROJECT_NAME}-AUv3-aumf)
 set(ICLOUD_PERMISSIONS_ENABLED TRUE)
 file(READ "Info.plist" PLIST_CONTENT_TO_MERGE)
 
+file(READ "bundleid_info.plist" AUMF_INFO_PLIST)
+
+# Replace occurrences of "BUNDLE_ID_HERE" in the input string with the value of the variable BUNDLE_ID_AUMF
+string(REPLACE "BUNDLE_ID_HERE" ${BUNDLE_ID_AUMF} AUMF_INFO_PLIST ${AUMF_INFO_PLIST})
+
 juce_add_plugin(${PROJECT_NAME}
     COMPANY_NAME "James Swift"                  # Specify the name of the plugin's author
     BUNDLE_ID ${BUNDLE_ID}                      # Bundle ID for Apple
@@ -68,7 +73,7 @@ juce_add_plugin(${PROJECT_NAME_AUMF}
     FORMATS AUv3                                
     AU_MAIN_TYPE kAudioUnitType_MusicEffect     # This is different from the other plugin and the reason we want to deliver two plugins
     ICLOUD_PERMISSIONS_ENABLED ${ICLOUD_PERMISSIONS_ENABLED}
-    PLIST_CONTENT_TO_MERGE ${PLIST_CONTENT_TO_MERGE}
+    PLIST_CONTENT_TO_MERGE ${AUMF_INFO_PLIST}   # Different plist content
     PLUGIN_NAME "${PROJECT_NAME} B"             # The plugin name displayed in the DAW.
     PRODUCT_NAME ${PROJECT_NAME_AUMF}           # Different product name
     DESCRIPTION ${PROJECT_DESCRIPTION}
@@ -83,10 +88,6 @@ add_dependencies(${PROJECT_NAME}_Standalone ${PROJECT_NAME_AUMF}_AUv3)
 
 set_target_properties(${PROJECT_NAME_AUMF} ${PROJECT_NAME_AUMF}_AUv3 PROPERTIES
   XCODE_ATTRIBUTE_SKIP_INSTALL "YES"
-)
-
-set_target_properties(${PROJECT_NAME_AUMF}_AUv3 PROPERTIES
-  XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${BUNDLE_ID_AUMF}
 )
 
 # This will copy the second AUv3 appex to the Standalone plugin
