@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-vst3:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Generate
@@ -18,9 +18,29 @@ jobs:
         run: ./build_debug.sh
 
   build-ios:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: List Xcode versions
+        if: runner.os == 'macos'
+        run: |
+          brew bundle --file=- <<-EOS
+          brew "xcodes"
+          EOS
+          xcodes installed
+
       - name: Generate
         shell: bash
         run: ./generate_ios.sh
+
+      - name: Build Release
+        shell: bash
+        run: ./build_release.sh
