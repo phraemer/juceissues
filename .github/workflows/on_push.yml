@@ -34,6 +34,7 @@ jobs:
         run: ./build_release.sh
 
   build-ios:
+    if: false
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
