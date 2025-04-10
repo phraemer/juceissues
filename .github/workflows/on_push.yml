@@ -5,17 +5,33 @@ on:
     branches: [main]
 
 jobs:
-  build-vst3:
+  build-darwin:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: List Xcode versions
+        if: runner.os == 'macos'
+        run: |
+          brew bundle --file=- <<-EOS
+          brew "xcodes"
+          EOS
+          xcodes installed
+
       - name: Generate
         shell: bash
         run: ./generate.sh
 
-      - name: Build Debug
+      - name: Build Release
         shell: bash
-        run: ./build_debug.sh
+        run: ./build_release.sh
 
   build-ios:
     runs-on: macos-15
