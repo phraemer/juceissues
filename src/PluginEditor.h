@@ -9,26 +9,25 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "PluginProcessor.h"
+
+class NewProjectAudioProcessor;
 
 //==============================================================================
 /**
-*/
-class NewProjectAudioProcessorEditor : public juce::AudioProcessorEditor
-{
+ */
+class NewProjectAudioProcessorEditor : public juce::AudioProcessorEditor {
 public:
-  NewProjectAudioProcessorEditor(NewProjectAudioProcessor&);
+  NewProjectAudioProcessorEditor(NewProjectAudioProcessor &);
   ~NewProjectAudioProcessorEditor() override;
 
   //==============================================================================
-  void paint(juce::Graphics&) override;
+  void paint(juce::Graphics &) override;
   void resized() override;
 
 private:
-
   // This reference is provided as a quick way for your editor to
   // access the processor object that created it.
-  NewProjectAudioProcessor& audioProcessor;
+  NewProjectAudioProcessor &_audioProcessor;
 
   juce::TextEditor _edit;
   juce::Label _frameLabel;
