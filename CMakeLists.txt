@@ -20,7 +20,7 @@ option(BUILD_IOS "Build for iOS" OFF)
 CPMAddPackage(
   NAME JUCE
   GITHUB_REPOSITORY juce-framework/JUCE
-  GIT_TAG 8.0.7
+  GIT_TAG develop
 )
 
 # If you are building a VST2 or AAX plugin, CMake needs to be told where to find these SDKs on your
