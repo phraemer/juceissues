@@ -110,8 +110,6 @@ set(COMPILER_WARNINGS
   -Wno-c++98-compat-extra-semi
   -Wno-float-equal
   -Wno-implicit-float-conversion
-  -Wno-cast-function-type-mismatch
-  -Wno-unused-but-set-variable
   $<$<AND:$<CXX_COMPILER_ID:Clang>,$<VERSION_GREATER_EQUAL:$<CXX_COMPILER_VERSION>,20.0>>:-Wno-nontrivial-memcall>>
 
   # Just My Code debugging for VS
