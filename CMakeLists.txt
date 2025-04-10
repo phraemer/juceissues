@@ -73,6 +73,12 @@ juce_add_plugin(${PROJECT_NAME}
   IPAD_SCREEN_ORIENTATIONS UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
 )
 
+target_include_directories(${PROJECT_NAME} SYSTEM
+  PRIVATE
+  ${JUCE_INCLUDES} # JUCE include paths
+  ${CMAKE_BINARY_DIR}/_deps # Any other third party includes
+)
+
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
 # this header will be automatically added to the target. The main function of the JuceHeader is to
