@@ -145,6 +145,8 @@ target_sources(${PROJECT_NAME}
   ${CPP_FILES}
   ${HPP_FILES})
 
+add_subdirectory(BinaryRes)
+
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE
   # JUCE_WEB_BROWSER and JUCE_USE_CURL would be on by default, but you might not need them.
@@ -156,6 +158,7 @@ target_compile_definitions(${PROJECT_NAME}
 )
 
 set(COMMON_LIBS
+  BinaryRes
   juce::juce_audio_utils
   juce::juce_dsp
   juce::juce_osc

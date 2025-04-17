@@ -29,6 +29,14 @@ private:
   // access the processor object that created it.
   NewProjectAudioProcessor &_audioProcessor;
 
+  const char *_selectedFontFileName{nullptr};
+  float _fontHeight{13.0f};
+
+  juce::ComboBox _fontCombo;
+  juce::Label _fontSizeLabel;
+  juce::Font _font;
+
+  juce::Label _testText, _fontDetails;
   juce::TextEditor _edit;
   juce::Label _frameLabel;
   int _counter = 0;
